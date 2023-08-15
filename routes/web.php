@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserPanelController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignUpController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,7 @@ Route::get('/signUp', function () {
 })->name('signUp');
 
 Route::get('/', [DashboardController::class, 'dashBoardRender'])->middleware('auth')->name("home");
+Route::get('/userPanel', [UserPanelController::class, 'renderUserPanel'])->middleware('auth')->name("home");
 
 // Custom Login
 Route::post('/loginReq', [LoginController::class, 'customLogin'])->name('request.login');
