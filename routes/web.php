@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserPanelController;
+use App\Http\Controllers\UserUpdateController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignUpController;
 use Illuminate\Support\Facades\Route;
@@ -26,11 +27,7 @@ Route::get('/signUp', function () {
 })->name('signUp');
 
 Route::get('/', [DashboardController::class, 'dashBoardRender'])->middleware('auth')->name("home");
-Route::get('/userPanel', [UserPanelController::class, 'renderUserPanel'])->middleware('auth')->name("home");
-
-// Custom Login
-Route::post('/loginReq', [LoginController::class, 'customLogin'])->name('request.login');
-Route::post('/signUpReq', [SignUpController::class, 'signUp'])->name('request.signUp');
+Route::get('/userPanel', [UserPanelController::class, 'renderUserPanel'])->middleware('auth')->name("userPanel");
 
 //Google
 Route::get('/login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
@@ -41,3 +38,9 @@ Route::get('/login/facebook/callback', [LoginController::class, 'handleFacebookC
 //Github
 Route::get('/login/github', [LoginController::class, 'redirectToGithub'])->name('login.github');
 Route::get('/login/github/callback', [LoginController::class, 'handleGithubCallback']);
+Route::get('/status/{userId}/{action}', [UserUpdateController::class, 'statusChanger'])->name('request.userStatusUpdate')->whereNumber('action',"userId");
+
+
+// Custom Login
+Route::post('/loginReq', [LoginController::class, 'customLogin'])->name('request.login');
+Route::post('/signUpReq', [SignUpController::class, 'signUp'])->name('request.signUp');

@@ -406,6 +406,29 @@
 
     <!-- / Navbar -->
 
+    <!-- Message  -->
+    @if(Session::has('statusUpdated'))
+    <div class="bs-toast toast fade show toast-placement-ex m-2 fade top-10 start-50 translate-middle-x" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <i class="mdi mdi-check-circle text-success me-2"></i>
+            <div class="me-auto fw-semibold">Status Update Successfully</div>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">{{session('message')}}</div>
+    </div>
+    @endif
+    @if(Session::has('statusNotUpdate'))
+    <div class="bs-toast toast fade show toast-placement-ex m-2 fade top-10 start-50 translate-middle-x" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <i class="mdi mdi-check-circle text-danger me-2"></i>
+            <div class="me-auto fw-semibold">Status Update Failed</div>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">{{session('message')}}</div>
+    </div>
+    @endif
+    <!-- /Message  -->
+
     <!-- Content wrapper -->
     <div class="content-wrapper">
         <!-- Content -->
@@ -429,16 +452,17 @@
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            <tr>
-                                <td>Albert Cook</td>
-                                <td>Albert Cook</td>
+                            @foreach($userArray as $key=>$user)
+                            <tr id="{{$user['userId']}}">
+                                <td>{{$user['userName']}}</td>
+                                <td>{{$user['userEmail']}}</td>
                                 <td>
-                                    Admin
+                                    {{$user['userRoleName']}}
                                 </td>
                                 <td>
-                                    Sales
+                                    {{$user['userTeamName']}}
                                 </td>
-                                <td><span class="badge bg-label-primary me-1">Active</span></td>
+                                <td><span class="badge bg-label-primary me-1">{{$user['status']}}</span></td>
                                 <td>
                                     <div class="dropdown">
                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -446,103 +470,19 @@
                                         </button>
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="javascript:void(0);"><i class="mdi mdi-pencil-outline me-1"></i> Edit</a>
-                                            <a class="dropdown-item" href="javascript:void(0);"><i class="mdi mdi-trash-can-outline me-1"></i> Delete</a>
+                                            <a class="dropdown-item" href="{{
+                                                $user['status'] ==='Active' ?
+                                                 route('request.userStatusUpdate', ['action' => 0,'userId'=>$user['userId']]):
+                                                 route('request.userStatusUpdate', ['action' => 1,'userId'=>$user['userId']])
+                                                }}">
+                                                <i class="mdi mdi-trash-can-outline me-1"></i>
+                                                {{$user['status'] ==='Active' ?'InActive':'Active'}}
+                                            </a>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <i class="mdi mdi-basketball mdi-20px text-info me-3"></i> <strong>Sports Project</strong>
-                                </td>
-                                <td>Barry Hunter</td>
-                                <td>
-                                    <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Lilian Fuller">
-                                            <img src="../../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Sophia Wilkerson">
-                                            <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Christina Parker">
-                                            <img src="../../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td><span class="badge bg-label-success me-1">Completed</span></td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                            <i class="mdi mdi-dots-vertical"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);"><i class="mdi mdi-pencil-outline me-2"></i> Edit</a>
-                                            <a class="dropdown-item" href="javascript:void(0);"><i class="mdi mdi-trash-can-outline me-2"></i> Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <i class="mdi mdi-greenhouse mdi-20px text-success me-3"></i>
-                                    <strong>Greenhouse Project</strong>
-                                </td>
-                                <td>Trevor Baker</td>
-                                <td>
-                                    <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Lilian Fuller">
-                                            <img src="../../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Sophia Wilkerson">
-                                            <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Christina Parker">
-                                            <img src="../../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td><span class="badge bg-label-info me-1">Scheduled</span></td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                            <i class="mdi mdi-dots-vertical"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);"><i class="mdi mdi-pencil-outline me-2"></i> Edit</a>
-                                            <a class="dropdown-item" href="javascript:void(0);"><i class="mdi mdi-trash-can-outline me-2"></i> Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><i class="mdi mdi-bank mdi-20px text-primary me-3"></i> <strong>Bank Project</strong></td>
-                                <td>Jerry Milton</td>
-                                <td>
-                                    <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Lilian Fuller">
-                                            <img src="../../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Sophia Wilkerson">
-                                            <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Christina Parker">
-                                            <img src="../../assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td><span class="badge bg-label-warning me-1">Pending</span></td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                            <i class="mdi mdi-dots-vertical"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);"><i class="mdi mdi-pencil-outline me-2"></i> Edit</a>
-                                            <a class="dropdown-item" href="javascript:void(0);"><i class="mdi mdi-trash-can-outline me-2"></i> Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

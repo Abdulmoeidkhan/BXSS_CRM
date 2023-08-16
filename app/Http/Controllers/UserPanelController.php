@@ -12,16 +12,25 @@ class UserPanelController extends Controller
     public function renderUserPanel(Request $req)
     {
         $team = Team::get(['id', 'display_name']);
-        $users = User::with('roles')->get(['id', 'name', 'email']);
+        $users = User::with('roles')->get(['id', 'name', 'email', 'status']);
         $userArray = [];
         foreach ($users as $key => $user) {
-            $requestedUser = [$user['id'], $user['name'], $user['email'], $user['roles'][0]['id'], $user['roles'][0]['display_name'], $user['roles'][0]['pivot']['team_id'],$team[$user['roles'][0]['pivot']['team_id']-1]['display_name']];
+            $requestedUser = [
+                'userId' => $user['id'],
+                'userName' => $user['name'],
+                'userEmail' => $user['email'],
+                'userRoleId' => $user['roles'][0]['id'],
+                'userRoleName' =>  $user['roles'][0]['display_name'],
+                'userTeamId' => $user['roles'][0]['pivot']['team_id'],
+                'userTeamName' => $team[$user['roles'][0]['pivot']['team_id'] - 1]['display_name'],
+                'status' => $user['status'] ==1? "Active":"Inactive"
+            ];
             array_push($userArray, $requestedUser);
             // echo "<br/>";
             // echo $user['roles'][0]['pivot']['team_id'];
         }
-        return $userArray;
         // return $users[0]['roles'][0];
-        // return view('UserPanel');
+        // return ['userArray' => $userArray, 'team' => $team];
+        return view('UserPanel', ['userArray' => $userArray, 'team' => $team]);
     }
 }
