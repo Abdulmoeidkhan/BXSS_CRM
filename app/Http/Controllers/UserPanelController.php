@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Team;
+use App\Models\Role;
 
 class UserPanelController extends Controller
 {
     public function renderUserPanel(Request $req)
     {
         $team = Team::get(['id', 'display_name']);
+        $role = Role::get(['id', 'display_name']);
         $users = User::with('roles')->get(['id', 'name', 'email', 'status']);
         $userArray = [];
         foreach ($users as $key => $user) {
@@ -31,6 +33,6 @@ class UserPanelController extends Controller
         }
         // return $users[0]['roles'][0];
         // return ['userArray' => $userArray, 'team' => $team];
-        return view('UserPanel', ['userArray' => $userArray, 'team' => $team]);
+        return view('UserPanel', ['userArray' => $userArray, 'teams' => $team,'roles'=>$role]);
     }
 }

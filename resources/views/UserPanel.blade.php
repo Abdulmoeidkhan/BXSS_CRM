@@ -457,9 +457,33 @@
                                 <td>{{$user['userName']}}</td>
                                 <td>{{$user['userEmail']}}</td>
                                 <td>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                            <i class="mdi mdi-dots-vertical"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            @foreach($roles as $key=>$role)
+                                            @if($user['userRoleName'] !== $role['display_name'] )
+                                            <a class="dropdown-item" href="{{route('request.userRoleUpdate',['action' => $role['id'],'userId'=>$user['userId']])}}">{{$role['display_name']}}</a>
+                                            @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
                                     {{$user['userRoleName']}}
                                 </td>
                                 <td>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                            <i class="mdi mdi-dots-vertical"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                        @foreach($teams as $key=>$team)
+                                            @if($user['userTeamName'] !== $team['display_name'] )
+                                            <a class="dropdown-item" href="javascript:void(0);">{{$team['display_name']}}</a>
+                                            @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
                                     {{$user['userTeamName']}}
                                 </td>
                                 <td><span class="badge bg-label-primary me-1">{{$user['status']}}</span></td>
