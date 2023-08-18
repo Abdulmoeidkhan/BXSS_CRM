@@ -17,6 +17,6 @@ class UserRoleController extends Controller
         $userData->removeRole($oldRole['name'], $userData['roles'][0]['pivot']['team_id']);
         $userData->addRole($newRole['name'], $userData['roles'][0]['pivot']['team_id']);
         $userUpdate = User::where('id', $userId)->update(['role'=> $newRole['name']]);
-        return $userUpdate ? redirect('/userPanel')->with('statusUpdated', 'User Status updated!') : redirect('/userPanel')->with('statusNotUpdate', 'Some Thing Went Wrong!');
+        return $userUpdate ? redirect('/userPanel')->with('statusOrTeamUpdated', 'User Status updated!') : redirect('/userPanel')->with('statusOrTeamNotUpdate', 'Some Thing Went Wrong!');
     }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserPanelController;
 use App\Http\Controllers\UserUpdateController;
 use App\Http\Controllers\UserRoleController;
+use App\Http\Controllers\UserTeamController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignUpController;
 use Illuminate\Support\Facades\Route;
@@ -49,3 +50,4 @@ Route::post('/signUpReq', [SignUpController::class, 'signUp'])->name('request.si
 // Custom Requests
 Route::get('/status/{userId}/{action}', [UserUpdateController::class, 'statusChanger'])->name('request.userStatusUpdate')->whereNumber('action',"userId");
 Route::get('/roles/{userId}/{action}', [UserRoleController::class, 'roleChanger'])->name('request.userRoleUpdate')->whereNumber('action',"userId");
+Route::get('/team/{userId}/{action}', [UserTeamController::class, 'teamChanger'])->name('request.userTeamUpdate')->whereNumber('action',"userId");

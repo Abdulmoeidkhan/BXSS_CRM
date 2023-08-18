@@ -407,21 +407,21 @@
     <!-- / Navbar -->
 
     <!-- Message  -->
-    @if(Session::has('statusUpdated'))
+    @if(Session::has('statusOrTeamUpdated'))
     <div class="bs-toast toast fade show toast-placement-ex m-2 fade top-10 start-50 translate-middle-x" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
             <i class="mdi mdi-check-circle text-success me-2"></i>
-            <div class="me-auto fw-semibold">Status Update Successfully</div>
+            <div class="me-auto fw-semibold">{{session('statusOrTeamUpdated')}}</div>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body">{{session('message')}}</div>
     </div>
     @endif
-    @if(Session::has('statusNotUpdate'))
+    @if(Session::has('statusOrTeamNotUpdate'))
     <div class="bs-toast toast fade show toast-placement-ex m-2 fade top-10 start-50 translate-middle-x" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
             <i class="mdi mdi-check-circle text-danger me-2"></i>
-            <div class="me-auto fw-semibold">Status Update Failed</div>
+            <div class="me-auto fw-semibold">{{session('statusOrTeamUpdated')}}</div>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body">{{session('message')}}</div>
@@ -479,7 +479,7 @@
                                         <div class="dropdown-menu">
                                         @foreach($teams as $key=>$team)
                                             @if($user['userTeamName'] !== $team['display_name'] )
-                                            <a class="dropdown-item" href="javascript:void(0);">{{$team['display_name']}}</a>
+                                            <a class="dropdown-item" href="{{route('request.userTeamUpdate',['action' => $team['id'],'userId'=>$user['userId']])}}">{{$team['display_name']}}</a>
                                             @endif
                                             @endforeach
                                         </div>

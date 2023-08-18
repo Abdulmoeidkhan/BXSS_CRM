@@ -34,5 +34,6 @@ class UserPanelController extends Controller
         // return $users[0]['roles'][0];
         // return ['userArray' => $userArray, 'team' => $team];
         return view('UserPanel', ['userArray' => $userArray, 'teams' => $team,'roles'=>$role]);
+        // return $userArray;
     }
 }
