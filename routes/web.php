@@ -29,7 +29,7 @@ Route::get('/signUp', function () {
 })->name('signUp');
 
 Route::get('/', [DashboardController::class, 'dashBoardRender'])->middleware('auth')->name("home");
-Route::get('/userPanel', [UserPanelController::class, 'renderUserPanel'])->middleware('auth')->name("userPanel");
+Route::get('/UserPanel', [UserPanelController::class, 'renderUserPanel'])->middleware('auth')->name("userPanel");
 
 //Google
 Route::get('/login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
@@ -48,6 +48,6 @@ Route::post('/signUpReq', [SignUpController::class, 'signUp'])->name('request.si
 
 
 // Custom Requests
-Route::get('/status/{userId}/{action}', [UserUpdateController::class, 'statusChanger'])->name('request.userStatusUpdate')->whereNumber('action',"userId");
+Route::post('/userUpdate', [UserUpdateController::class, 'statusAndNameChanger'])->name('request.userStatusUpdate');
 Route::get('/roles/{userId}/{action}', [UserRoleController::class, 'roleChanger'])->name('request.userRoleUpdate')->whereNumber('action',"userId");
 Route::get('/team/{userId}/{action}', [UserTeamController::class, 'teamChanger'])->name('request.userTeamUpdate')->whereNumber('action',"userId");

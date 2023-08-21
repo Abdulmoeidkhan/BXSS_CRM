@@ -8,9 +8,10 @@ use App\Models\User;
 
 class UserUpdateController extends Controller
 {
-    public function statusChanger(Request $req, $userId, $action)
+    public function statusAndNameChanger(Request $req)
     {
-        $userUpdate = User::where('id', $userId)->update(['status' => $action]);
-        return $userUpdate ? redirect('/userPanel')->with('statusUpdated', 'User Status updated!') : redirect('/userPanel')->with('statusNotUpdate', 'Some Thing Went Wrong!');
+
+        $userUpdate = User::where('id', $req->modalEditUserId)->update(['status' => $req->modalEditUserStatus, 'name' => $req->modalEditUserName]);
+        return $userUpdate ? redirect()->route('userPanel')->with('statusUpdated', 'User updated!') : redirect()->route('userPanel')->with('statusNotUpdate', 'Some Thing Went Wrong!');
     }
 }

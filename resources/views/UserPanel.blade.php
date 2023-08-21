@@ -452,7 +452,7 @@
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            @foreach($userArray as $key=>$user)
+                            @foreach($userArray as $userKey=>$user)
                             <tr id="{{$user['userId']}}">
                                 <td>{{$user['userName']}}</td>
                                 <td>{{$user['userEmail']}}</td>
@@ -462,7 +462,7 @@
                                             <i class="mdi mdi-dots-vertical"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            @foreach($roles as $key=>$role)
+                                            @foreach($roles as $roleKey=>$role)
                                             @if($user['userRoleName'] !== $role['display_name'] )
                                             <a class="dropdown-item" href="{{route('request.userRoleUpdate',['action' => $role['id'],'userId'=>$user['userId']])}}">{{$role['display_name']}}</a>
                                             @endif
@@ -477,7 +477,7 @@
                                             <i class="mdi mdi-dots-vertical"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                        @foreach($teams as $key=>$team)
+                                            @foreach($teams as $teamKey=>$team)
                                             @if($user['userTeamName'] !== $team['display_name'] )
                                             <a class="dropdown-item" href="{{route('request.userTeamUpdate',['action' => $team['id'],'userId'=>$user['userId']])}}">{{$team['display_name']}}</a>
                                             @endif
@@ -493,15 +493,15 @@
                                             <i class="mdi mdi-dots-vertical"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);"><i class="mdi mdi-pencil-outline me-1"></i> Edit</a>
-                                            <a class="dropdown-item" href="{{
+                                            <a class="dropdown-item" href="javascript:;" class="btn btn-primary me-3" data-bs-target="#editUser{{$userKey}}" data-bs-toggle="modal"><i class="mdi mdi-pencil-outline me-1"></i> Edit</a>
+                                            <!-- <a class="dropdown-item" href="{{
                                                 $user['status'] ==='Active' ?
                                                  route('request.userStatusUpdate', ['action' => 0,'userId'=>$user['userId']]):
                                                  route('request.userStatusUpdate', ['action' => 1,'userId'=>$user['userId']])
                                                 }}">
                                                 <i class="mdi mdi-trash-can-outline me-1"></i>
                                                 {{$user['status'] ==='Active' ?'InActive':'Active'}}
-                                            </a>
+                                            </a> -->
                                         </div>
                                     </div>
                                 </td>
@@ -513,6 +513,50 @@
             </div>
             <!--/ Basic Bootstrap Table -->
 
+
+            <!-- Modal -->
+            <!-- Edit User Modal -->
+            @foreach($userArray as $userKey=>$user)
+            <div class="modal fade" id="editUser{{$userKey}}" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-simple modal-edit-user">
+                    <div class="modal-content p-3 p-md-5">
+                        <div class="modal-body py-3 py-md-0">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="text-center mb-4">
+                                <h3 class="mb-2">Edit User Information</h3>
+                                <p class="pt-1">Updating user details will receive a privacy audit.</p>
+                            </div>
+                            <form id="editUserForm" class="row g-4" method="POST" action="{{route('request.userStatusUpdate')}}">
+                                @csrf
+                                <div class="col-12">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="text" id="modalEditUserName" name="modalEditUserName" class="form-control" placeholder="john.doe.007" value="{{$user['userName']}}" />
+                                        <input type="hidden" id="modalEditUserId" name="modalEditUserId" class="form-control" value="{{$user['userId']}}" />
+                                        <label for="modalEditUserName">Username</label>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-floating form-floating-outline">
+                                        <select id="modalEditUserStatus" name="modalEditUserStatus" class="form-select" aria-label="Default select example">
+                                            <option value="1" <?php echo ($user['status'] === 'Active' ? 'selected' : null); ?>>Active</option>
+                                            <option value="0" <?php echo ($user['status'] === 'Inactive' ? 'selected' : null); ?>>Inactive</option>
+                                        </select>
+                                        <label for="modalEditUserStatus">Status</label>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
+                                    <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
+                                        Cancel
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+            <!--/ Edit User Modal -->
 
             <!-- Footer -->
             <footer class="content-footer footer bg-footer-theme">
