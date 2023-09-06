@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Login Cover - Pages | Materialize - Material Design HTML Admin Template</title>
+    <title>BXSS | Event Management System</title>
 
     <meta name="description" content="" />
 
@@ -44,7 +44,7 @@
                     </svg>
                 </span>
             </span>
-            <span class="app-brand-text demo text-heading fw-bold">Materialize</span>
+            <span class="app-brand-text demo text-heading fw-bold">BXSS Event Managment System</span>
         </a>
         <!-- /Logo -->
         <div class="authentication-inner row m-0">

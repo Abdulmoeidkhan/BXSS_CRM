@@ -7,6 +7,7 @@ use App\Http\Controllers\UserRoleController;
 use App\Http\Controllers\UserTeamController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SignUpController;
+use App\Http\Controllers\AddEventController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,12 +26,15 @@ Route::get('/signIn', function () {
 })->name('signIn');
 
 Route::get('/signUp', function () {
-    return view('signUp');
+    return view('signUpCustom');
 })->name('signUp');
 
 Route::get('/', [DashboardController::class, 'dashBoardRender'])->middleware('auth')->name("home");
 Route::get('/UserPanel', [UserPanelController::class, 'renderUserPanel'])->middleware('auth')->name("userPanel");
+Route::get('/AddEvent', [AddEventController::class, 'renderAddForm'])->middleware('auth')->name("addEvent");
 
+// Logout
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 //Google
 Route::get('/login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('/login/google/callback', [LoginController::class, 'handleGoogleCallback']);

@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Login Cover - Pages | Materialize - Material Design HTML Admin Template</title>
+    <title>BXSS | Event Management System</title>
 
     <meta name="description" content="" />
 
@@ -21,8 +21,8 @@
 
     <div class="authentication-wrapper authentication-cover">
         <!-- Logo -->
-        <a href="index.html" class="auth-cover-brand d-flex align-items-center gap-2">
-            <span class="app-brand-logo demo">
+        <a href="route('signIn')" class="auth-cover-brand d-flex align-items-center gap-2">
+            <!-- <span class="app-brand-logo demo">
                 <span style="color: var(--bs-primary)">
                     <svg width="268" height="150" viewBox="0 0 38 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M30.0944 2.22569C29.0511 0.444187 26.7508 -0.172113 24.9566 0.849138C23.1623 1.87039 22.5536 4.14247 23.5969 5.92397L30.5368 17.7743C31.5801 19.5558 33.8804 20.1721 35.6746 19.1509C37.4689 18.1296 38.0776 15.8575 37.0343 14.076L30.0944 2.22569Z" fill="currentColor" />
@@ -43,8 +43,8 @@
                         </defs>
                     </svg>
                 </span>
-            </span>
-            <span class="app-brand-text demo text-heading fw-bold">Materialize</span>
+            </span> -->
+            <span class="app-brand-text demo text-heading fw-bold">Badar Expo Solution</span>
         </a>
         <!-- /Logo -->
         <div class="authentication-inner row m-0">
@@ -58,7 +58,8 @@
             <!-- Login -->
             <div class="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg position-relative py-sm-5 px-4 py-4">
                 <div class="w-px-400 mx-auto pt-5 pt-lg-0">
-                    <h4 class="mb-2 fw-semibold">Welcome to Materialize! 👋</h4>
+                    <img class="align-items-center authentication-bg" src="{{asset('assets/img/backgrounds/BXSS_Hires.jpg')}}" widht="250px" height="250px" alt="Logo" />
+                    <h5 class="mb-2 fw-semibold">Welcome to Event Management System</h5>
                     <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
                     <form id="formAuthentication" class="mb-3" action="{{route('request.login')}}" method="POST">
@@ -87,13 +88,13 @@
                             </a>
                         </div>
                         @csrf
-                        <input type="submit" name="Sign In" value="Sign In" class="btn btn-primary d-grid w-100" style="background:#5a5fe0;"/>
+                        <input type="submit" name="Sign In" value="LOGIN" class="btn btn-danger d-grid w-100" style="background:#e04440;" />
                     </form>
 
                     <p class="text-center mt-2">
                         <span>New on our platform?</span>
-                        <a href="auth-register-cover.html">
-                            <span>Create an account</span>
+                        <a href="{{route('signUp')}}">
+                            <span>Register an account</span>
                         </a>
                     </p>
 

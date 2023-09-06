@@ -13,6 +13,14 @@ use Laratrust\Models\Team;
 class LoginController extends Controller
 {
 
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->flush();
+        $request->session()->regenerate();
+        return redirect()->route('home');
+    }
+
     // Custom Login
 
     public function customLogin(Request $req)
@@ -89,7 +97,7 @@ class LoginController extends Controller
             $user->email = $data->email;
             $user->provider_id = $data->id;
             $user->avatar = $data->avatar;
-            $user->role='user';
+            $user->role = 'user';
             $user->save();
             $user->addRole($admin, $team);
         }

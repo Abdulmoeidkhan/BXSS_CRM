@@ -18,6 +18,7 @@ class DashboardController extends Controller
         // return print_r(Auth::user()->hasRole('superadministrator'));
         // return User::where('id',Auth::user()->id)->hasRole(user);
         // return print_r(User::get(Auth::user()->name));
-        return view('dashboard', [...$data]);
+        return view('userDashboard', [...$data]);
+        // return view('dashboard', [...$data]);
     }
 }
