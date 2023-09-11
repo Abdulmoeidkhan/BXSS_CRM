@@ -29,6 +29,14 @@ Route::get('/signUp', function () {
     return view('signUpCustom');
 })->name('signUp');
 
+Route::get('/createAccount', function () {
+    return view('createAccount');
+})->name('createAccount');
+
+Route::get('/activateAccount', function () {
+    return view('activateAccount');
+})->name('activateAccount');
+
 Route::get('/', [DashboardController::class, 'dashBoardRender'])->middleware('auth')->name("home");
 Route::get('/UserPanel', [UserPanelController::class, 'renderUserPanel'])->middleware('auth')->name("userPanel");
 Route::get('/AddEvent', [AddEventController::class, 'renderAddForm'])->middleware('auth')->name("addEvent");

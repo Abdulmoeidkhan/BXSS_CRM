@@ -58,7 +58,13 @@
                     </div>
                     <br />
                     <br />
-                    <button type="submit" class="btn btn-danger" style="width: 100%; background-color:#ea4335;"><a href="{{ route('login.google') }}" class="btn-text-google-plus"> <i class="tf-icons mdi mdi-24px mdi-google" style="color:#000; font-weight:bolder;"></i> </a>&nbsp; Sign in with Google</button>
+                    <button  class="btn btn-danger" style="width: 100%; background-color:#ea4335;"><a href="{{ route('login.google') }}" class="btn-text-google-plus"> <i class="tf-icons mdi mdi-24px mdi-google" style="color:#000; font-weight:bolder;"></i> </a>&nbsp; Sign in with Google</button>
+                    <br />
+                    <br />
+                    <button class="btn btn-primary" style="width: 100%; background-color:#1877f2;"><a href="{{ route('login.facebook') }}" class="btn-text-google-plus"> <i class="tf-icons mdi mdi-24px mdi-facebook" style="color:#000; font-weight:bolder;"></i> </a>&nbsp; Sign in with Facebook</button>
+                    <br />
+                    <br />
+                    <button class="btn btn-primary" style="width: 100%; background-color:#0a66c2;"><a href="{{ route('login.facebook') }}" class="btn-text-google-plus"> <i class="tf-icons mdi mdi-24px mdi-linkedin" style="color:#000; font-weight:bolder;"></i> </a>&nbsp; Sign in with LinkedIn</button>
                 </form>
             </div>
 
